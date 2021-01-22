@@ -2,14 +2,14 @@ import React from 'react';
 
 import './HeadTable.css';
 
-const HeadTable = ({ data, sort, setFilteredData, search, setQuery }) => {
+const HeadTable = ({ sort, setFilteredData, search, setQuery, headings }) => {
 
-    const headings = data[0] && Object.keys(data[0]).filter(el => el !== 'id');
+    // const headings = data[0] && Object.keys(data[0]).filter(el => el !== 'id');
     
     return (
         <thead>
             <tr className="table-head">
-                {data[0] && headings.map((heading, i) => {
+                {headings && headings.map((heading, i) => {
                     if(heading){                    
                         return <th key={heading + i} className={`column${i+1}`}>{heading} 
                                     <input type='text' onChange={e =>{
