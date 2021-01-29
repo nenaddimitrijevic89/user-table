@@ -4,16 +4,16 @@ import "./Table.css";
 import HeadTable from "./HeadTable/HeadTable";
 import BodyTable from "./BodyTable/BodyTable";
 
-const Table = ({ data, sort, setFilteredData, search, setQuery, headings }) => {
+const Table = ({ data, headings, onChange, sort, query }) => {
   return (
     <div className="table">
       <table>
         <HeadTable
-          sort={sort}
-          search={search}
-          setFilteredData={setFilteredData}
-          setQuery={setQuery}
           headings={headings}
+          onChange={onChange}
+          sort={sort}
+          data={data}
+          query={query}
         />
         <BodyTable data={data} />
       </table>

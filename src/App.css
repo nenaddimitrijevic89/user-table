@@ -3,3 +3,7 @@
   margin: 0 auto;
   min-height: 100vh;
 }
+.error{
+  text-align: center;
+  margin-top: 100px;
+}

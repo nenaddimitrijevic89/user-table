@@ -69,3 +69,6 @@ tbody tr:hover {
   text-align: center;
   padding-right: 62px;
 }
+.no_data{
+ padding-left: 15px;
+}

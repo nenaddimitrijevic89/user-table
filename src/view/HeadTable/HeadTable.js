@@ -2,31 +2,36 @@ import React from 'react';
 
 import './HeadTable.css';
 
-const HeadTable = ({ sort, setFilteredData, search, setQuery, headings }) => {
-
-    // const headings = data[0] && Object.keys(data[0]).filter(el => el !== 'id');
+const HeadTable = ({ headings, onChange, sort, query }) => {
     
     return (
         <thead>
             <tr className="table-head">
                 {headings && headings.map((heading, i) => {
-                    if(heading){                    
-                        return <th key={heading + i} className={`column${i+1}`}>{heading} 
-                                    <input type='text' onChange={e =>{
-                                        setQuery(e.target.value)
-                                        const filtered = search(e.target.value, heading)
-                                        setFilteredData(filtered)
-                                    }}/>
+                                    
+                        return <th key={heading} className={`column${i+1}`}>
+            
+                                    {(heading === 'registered' || heading === 'balance') 
+                                    && <i className='fa fa-arrow-up right' onClick={()=> sort(heading)}></i>}
+
+                                    {heading}
+
+                                    {(heading === 'registered' || heading === 'balance') 
+                                    && <i className='fa fa-arrow-down left' onClick={()=> sort(heading, 'asc')}></i>} 
+
+                                    { heading !== 'isActive' && <input type='text' onChange={ (e) => onChange(e.target.value, heading)}/>}
+
+                                    {heading === 'isActive' &&
+                                    <>
+                                        <div className='check'>
+                                            <input type="checkbox" checked={query.checkedTrue} name="checkedTrue" onChange={ (e) => onChange(e.target.checked, 'checkedTrue')}/> true
+                                        </div>
+                                        <div className='check'>
+                                            <input type="checkbox" checked={query.checkedFalse} name="checkedFalse" onChange={ (e) => onChange(e.target.checked, 'checkedFalse')}/> false
+                                        </div>
+                                    </>
+                                    }
                                 </th>
-                    // }else if(heading === 'isActive'){
-                    //     return <th key={heading + i} className={`column${i+1}`}>
-                    //                 <i className='fa fa-check'></i> {heading} <i className="fa fa-close"></i>
-                    //             </th>
-                    // }else{                        
-                    //     return <th key={heading + i} className={`column${i+1}`}>
-                    //                 <i className='fa fa-arrow-up' onClick={()=> sort(data, heading)}></i> {heading} <i className="fa fa-arrow-down" onClick={()=> sort(data, heading, 'asc')}></i>
-                    //             </th>
-                    }
                 })}
             </tr>
         </thead>      
